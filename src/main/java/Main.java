@@ -6,18 +6,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.awt.event.KeyEvent;
 import java.util.Collections;
 
 class HelloSelenium {
-        public static void main(String[] args) {
+        public static void main(String[] args) throws InterruptedException {
 
-            //TEST DATA
-            String pathTest="https://www.onet.pl/";
-            String buttonPathTest="//*[@id='tabMenu']/div/ul/li[1]/a";
+
 
             //ACTUAL DATA
-            String path = "https://sklep.pgg.pl/produkty/13/6/pieklorz-ekogroszek-1000-kg-luz";
-            String buttonPath="//*[@id=main]/div/div[1]/div[3]/div[3]/form/button";
+            String path = "https://portalpasazera.pl";
+            String cookiesAccept = "/html/body";
+            String departureLocation="//*[@id=\'departureFrom\']";
+            String arrivalLocation = "//*[@id=\'arrivalTo\']";
+            String directConnection = "//*[@id=\"accessible-body\"]/div/form/div[8]/div/div/label/span";
+            String lookForButton = "//*[@id=\"accessible-body\"]/div/form/div[11]/button";
 
             WebDriverManager.chromedriver().setup();
             ChromeOptions option = new ChromeOptions();
@@ -25,16 +28,25 @@ class HelloSelenium {
             option.setExperimentalOption("useAutomationExtension", false);
             WebDriver driver = new ChromeDriver(option);
 
-            driver.get(pathTest);
-            try {
-                Thread.sleep(5000);
-            }catch (Exception e){
+            driver.get(path);
+            Thread.sleep(1000);
 
-            }
+            WebElement cookiesButton = driver.findElement(By.xpath(cookiesAccept));
+            cookiesButton.click();
+
+            WebElement departureLocationElement =driver.findElement(By.xpath(departureLocation));
+            departureLocationElement.sendKeys("Wodzisław");
+            WebElement arrivalLocationElement =driver.findElement(By.xpath(arrivalLocation));
+            arrivalLocationElement.sendKeys("Katowice");
+            WebElement directConnectionElement = driver.findElement(By.xpath(directConnection));
+            directConnectionElement.click();
+
+            WebElement lookForButon = driver.findElement(By.xpath(lookForButton));
+            lookForButon.click();
+
+            Thread.sleep(2000);
 
 
-            WebElement cartBox =driver.findElement(By.xpath(buttonPathTest));
-            cartBox.click();
 
         }
     }
