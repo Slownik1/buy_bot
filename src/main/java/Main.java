@@ -22,6 +22,10 @@ class HelloSelenium {
             String directConnection = "//*[@id=\"accessible-body\"]/div/form/div[8]/div/div/label/span";
             String lookForButton = "//*[@id=\"accessible-body\"]/div/form/div[11]/button";
 
+            String departureTimeInString = "//*[@id=\"accessible-body\"]/div[1]/div[3]/div[2]/div[1]/div[1]/div/div[2]/div[1]/div[2]/span[2]";
+            Double departuretimeInInt;
+            String buyButton;
+
             WebDriverManager.chromedriver().setup();
             ChromeOptions option = new ChromeOptions();
             option.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
@@ -46,7 +50,18 @@ class HelloSelenium {
 
             Thread.sleep(2000);
 
+            WebElement departureTimeElement = driver.findElement(By.xpath(departureTimeInString));
 
+            if(GetTime.istimeGood(GetTime.convertToDouble(departureTimeElement.getText()))){
+                System.out.print("Za mało czasu ! ");
+            }
+            else{
+                System.out.println("Dosc czasu ");
+            }
+
+
+
+            System.out.print(departureTimeElement.getText());
 
         }
     }

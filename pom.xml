@@ -23,6 +23,22 @@
             <artifactId>webdrivermanager</artifactId>
             <version>5.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.20</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.10.14</version>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori.moonshine</groupId>
+            <artifactId>moonshine-bom</artifactId>
+            <version>2.0.4</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <properties>
