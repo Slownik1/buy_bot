@@ -1,4 +1,5 @@
 
+import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,9 +23,9 @@ class HelloSelenium {
             String directConnection = "//*[@id=\"accessible-body\"]/div/form/div[8]/div/div/label/span";
             String lookForButton = "//*[@id=\"accessible-body\"]/div/form/div[11]/button";
 
-            String departureTimeInString = "//*[@id=\"accessible-body\"]/div[1]/div[3]/div[2]/div[1]/div[1]/div/div[2]/div[1]/div[2]/span[2]";
+            String departureTimeInString = "//*[@id=\"accessible-body\"]/div[1]/div[3]/div[3]/div[1]/div[1]/div/div[2]/div[1]/div[2]/span[2]";
             Double departuretimeInInt;
-            String buyButton;
+            String buyButton = "//*[@id=\"accessible-body\"]/div[1]/div[3]/div[2]/div[1]/div[2]/div/div[2]/button[2]";
 
             WebDriverManager.chromedriver().setup();
             ChromeOptions option = new ChromeOptions();
@@ -53,10 +54,14 @@ class HelloSelenium {
             WebElement departureTimeElement = driver.findElement(By.xpath(departureTimeInString));
 
             if(GetTime.istimeGood(GetTime.convertToDouble(departureTimeElement.getText()))){
-                System.out.print("Za mało czasu ! ");
+                WebElement buyButtonElement = driver.findElement(By.xpath(buyButton));
+                buyButtonElement.click();
+                WebElement buyButtonConfirm = driver.findElement(By.xpath("//*[@id=\"buyTicketWindow\"]/div[3]/div/div[2]/div/div/button"));
+                buyButtonElement.click();
+
             }
             else{
-                System.out.println("Dosc czasu ");
+                System.out.println("Za mało czasu ! ");
             }
 
 
